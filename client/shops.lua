@@ -51,7 +51,7 @@ Citizen.CreateThread(function()
             if DoesEntityExist(vehicle) and not IsPedInAnyVehicle(PlayerPedId(), false) then
                 local vehicleHood = GetEntityBoneIndexByName(vehicle, 'engine')
 
-                while #(GetEntityCoords(PlayerPedId()) - GetWorldPositionOfEntityBone(vehicle, vehicleHood)) <= 1.25 do
+                while #(GetEntityCoords(PlayerPedId()) - GetWorldPositionOfEntityBone(vehicle, vehicleHood)) <= 1.5 do
                     Citizen.Wait(0)
                     Draw3DText(
                         GetWorldPositionOfEntityBone(vehicle, vehicleHood).x, 

@@ -127,16 +127,25 @@ end)
 
 RegisterNetEvent('AG_VehicleWorkshop:ChangeTire')
 AddEventHandler('AG_VehicleWorkshop:ChangeTire', function(tireLocation)
-    if tireLocation == 'LF' then
-        print('Changed LF')
+    -- GENERAL TIRE CODE --
+    FreezeEntityPosition(PlayerPedId(), true)
+    TaskStartScenarioInPlace(PlayerPedId(), "CODE_HUMAN_MEDIC_KNEEL", 0, true)
+    Wait(3000)
+    exports['progressBars']:startUI(10 * 1000, "Changing Tire...")
+    Wait(10 * 1000)
+    SetVehicleMod(vehicle, 11, 3, false)
+    SuccessMessage('Tire has been changed!')
+    ClearPedTasks(PlayerPedId());
+    FreezeEntityPosition(PlayerPedId(), false)
     
+    -- Use this if you want specific code for each tire
+    if tireLocation == 'LF' then
+
     elseif tireLocation == 'LR' then
-        print('Changed LR')
     
     elseif tireLocation == 'RF' then
-        print('Changed RF')
     
     elseif tireLocation == 'RR' then
-        print('Changed RR')
+        
     end
 end)

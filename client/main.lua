@@ -1,3 +1,5 @@
+local hoodOpen = false
+
 ---------- BLIPS ----------
 Citizen.CreateThread(function()
     for k,v in pairs(Config.Shops) do
@@ -14,6 +16,29 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+---------- Commands ----------
+RegisterCommand('hood', function(source, args)
+    if IsPedInAnyVehicle(PlayerPedId(), false) then
+        local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+        if hoodOpen then
+            SetVehicleDoorShut(vehicle, 4, true)
+            hoodOpen = false
+        else
+            SetVehicleDoorOpen(vehicle, 4, false, true)
+            hoodOpen = true
+        end
+    else
+        local vehicle = GetVehiclePedIsIn(PlayerPedId(), true)
+        if hoodOpen then
+            SetVehicleDoorShut(vehicle, 4, true)
+            hoodOpen = false
+        else
+            SetVehicleDoorOpen(vehicle, 4, false, true)
+            hoodOpen = true
+        end
+    end
+end, false)
 
 ---------- MENUS ----------
 RegisterNetEvent('AG_VehicleWorkshop:EngineMenu')
